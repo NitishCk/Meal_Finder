@@ -48,6 +48,12 @@
         </div>
     </div>
 
+    <!-- Description of Category -->
+    <div class="categoryDetails">
+        <h2 id="categoryTitle"></h2>
+        <p id="categoryDesc"></p>
+    </div>
+
     <!-- Footer Section -->
     <footer class="copyright">
         <div>Copyright © 2025 Meal Finder All rights reserved. Design : <strong>Nitish ChittoorKrishnamurthy</strong></div>
@@ -55,9 +61,15 @@
 
     <!-- JS Code to Fetch the Data From API -->
     <script>
+        // Obtained the Category from the Main Page
+        const params = new URLSearchParams(window.location.search);
+        const categoryName = params.get("category");
+        const categoryTitle = document.getElementById("categoryTitle");
+        const categoryDesc = document.getElementById("categoryDesc")
         const hamburger = document.getElementById("hamburger")
         const sideMenu = document.getElementById("sidemenu")
         const closeBtn = document.getElementById("close")
+        const sideBarList = document.getElementById("itemLinks")
 
         // Hamburger Menu (Open and Close Functionality)
         hamburger.addEventListener("click", () => {
@@ -68,6 +80,28 @@
             sideMenu.classList.remove("open")
         })
 
+        // API Data 
+        fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+            .then((response) => {
+                if(!response.ok){
+                    throw new Error(`Error Status : ${response.status}`)
+                }
+                else{
+                    return response.json()
+                }
+            })
+            .then((categoriesData) => {
+                sideBarList.innerHTML  = categoriesData.categories.map((item, index) => {
+                    return `<li>
+                                <a href="?category=${encodeURIComponent(item.strCategory)}">${item.strCategory}</a>
+                            </li>`
+                }).join("")
+
+            })
+            .catch((error) => {
+                hideLoader();
+                console.log(error)
+            })
     </script>
 </body>
 </html>
