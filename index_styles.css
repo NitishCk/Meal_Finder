@@ -193,3 +193,19 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+/* Footer Section */
+.copyright {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: white;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.copyright strong:hover {
+    color: #e06120;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
