@@ -11,6 +11,9 @@
 </head>
 <body>
     
+    <!-- Spinner -->
+    <div id="loader" class="loader"></div>
+
     <!-- Navigation Bar -->
     <div class="navbar">
         <div class="nav-left">
@@ -70,6 +73,16 @@
     <!-- JS Code to Fetch the Data From API  -->
     <script>
 
+        // Function to Show the Spinner
+        function showLoader() {
+            document.getElementById("loader").classList.remove("hidden");
+        }
+
+        // Function to Hide the Spinner
+        function hideLoader() {
+            document.getElementById("loader").classList.add("hidden");
+        }
+
         const categoriesDiv = document.getElementById("categories")
         const hamburger = document.getElementById("hamburger")
         const sideMenu = document.getElementById("sidemenu")
@@ -88,6 +101,9 @@
             sideMenu.classList.remove("open")
         })
 
+        // Loads The Data, when there is Delay in Fetching
+        showLoader()
+
         // API Data
         fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
             .then((response) => {
@@ -99,6 +115,9 @@
                 }
             })
             .then((categoriesData) => {
+                // Hides Loades, once the data is Fetched
+                hideLoader()
+
                 // Categories Section
                 categoriesDiv.innerHTML = categoriesData.categories.map((item, index, categoriesData) => {
                     return `<div class = "category-card">
@@ -118,11 +137,12 @@
                 }).join("")
             })
             .catch((error) => {
+                hideLoader()
                 console.log(error)
                 categoriesDiv.innerHTML = `<h3>Failed to load Categories.</h3>`;
             })
         
-        // Searched Items Section
+        // Function to execute the Searched Items Section
         function searchMeals(foodName){
             fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodName}`)
                 .then((response) => {
