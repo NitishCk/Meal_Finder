@@ -16,7 +16,20 @@
     <div class="navbar">
         <div class="nav-left">
             <i class="fa-solid fa-utensils"></i>
-            <a href="">MEAL FINDER</a>
+            <a href="/">MEAL FINDER</a>
+        </div>
+
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="sidemenu" id="sidemenu">
+            <div class="sidemenu-header">
+                <i class="fa-solid fa-xmark" id="close"></i>
+            </div>
+            <ul class="item-links" id="itemLinks">
+
+            </ul>
         </div>
     </div>
 
@@ -34,5 +47,22 @@
             <p>PERSONALIZE YOUR EXPERIENCE</p>
         </div>
     </div>
+
+    <!-- JS Code to Fetch the Data From API -->
+    <script>
+        const hamburger = document.getElementById("hamburger")
+        const sideMenu = document.getElementById("sidemenu")
+        const closeBtn = document.getElementById("close")
+
+        // Hamburger Menu (Open and Close Functionality)
+        hamburger.addEventListener("click", () => {
+            sideMenu.classList.add("open")
+        })
+
+        closeBtn.addEventListener("click", () => {
+            sideMenu.classList.remove("open")
+        })
+
+    </script>
 </body>
 </html>
