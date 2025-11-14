@@ -11,6 +11,8 @@
 </head>
 <body>
 
+    <!-- Spinner -->
+    <div id="loader" class="loader"></div>
 
     <!-- Navigation Bar -->
     <div class="navbar">
@@ -71,6 +73,17 @@
 
     <!-- JS Code to Fetch the Data From API -->
     <script>
+
+        // Function to Show the Spinner
+        function showLoader() {
+            document.getElementById("loader").classList.remove("hidden");
+        }
+
+        // Function to Hide the Spinner
+        function hideLoader() {
+            document.getElementById("loader").classList.add("hidden");
+        }
+
         // Obtained the Category from the Main Page
         const params = new URLSearchParams(window.location.search);
         const categoryName = params.get("category");
@@ -94,6 +107,9 @@
             sideMenu.classList.remove("open")
         })
 
+        // Loads The Data, when there is Delay in Fetching
+        showLoader()
+
         // API Data 
         fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
             .then((response) => {
@@ -105,6 +121,10 @@
                 }
             })
             .then((categoriesData) => {
+                // Hides Loader, once the data is Fetched
+                hideLoader()
+                
+                // SideBar Section
                 sideBarList.innerHTML  = categoriesData.categories.map((item, index) => {
                     return `<li>
                                 <a href="?category=${encodeURIComponent(item.strCategory)}">${item.strCategory}</a>

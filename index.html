@@ -115,7 +115,7 @@
                 }
             })
             .then((categoriesData) => {
-                // Hides Loades, once the data is Fetched
+                // Hides Loader, once the data is Fetched
                 hideLoader()
 
                 // Categories Section
@@ -127,6 +127,7 @@
                                 <p>${item.strCategory.toUpperCase()}</p>
                             </div>`
                 }).join("")
+                
                 // SideBar Section
                 sideBarList.innerHTML  = categoriesData.categories.map((item, index) => {
                     return `<li>
