@@ -17,6 +17,19 @@
             <i class="fa-solid fa-utensils"></i>
             <a href="">MEAL FINDER</a>
         </div>
+
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="sidemenu" id="sidemenu">
+            <div class="sidemenu-header">
+                <i class="fa-solid fa-xmark" id="close"></i>
+            </div>
+            <ul class="item-links" id="itemLinks">
+
+            </ul>
+        </div>
     </div>
 
     <!-- Hero Section -->
@@ -48,11 +61,24 @@
     <footer class="copyright">
         <div>Copyright © 2025 Meal Finder All rights reserved. Design : <strong>Nitish ChittoorKrishnamurthy</strong></div>
     </footer>
-    
+
     <!-- JS Code to Fetch the Data From API  -->
     <script>
 
         const categoriesDiv = document.getElementById("categories")
+        const hamburger = document.getElementById("hamburger")
+        const sideMenu = document.getElementById("sidemenu")
+        const closeBtn = document.getElementById("close")
+        const sideBarList = document.getElementById("itemLinks")
+
+        // Hamburger Menu (Open and Close Functionality)
+        hamburger.addEventListener("click", () => {
+            sideMenu.classList.add("open")
+        })
+
+        closeBtn.addEventListener("click", () => {
+            sideMenu.classList.remove("open")
+        })
 
         // API Data
         fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
@@ -65,6 +91,7 @@
                 }
             })
             .then((categoriesData) => {
+                // Categories Section
                 categoriesDiv.innerHTML = categoriesData.categories.map((item, index, categoriesData) => {
                     return `<div class = "category-card">
                                 <a href = "categoryDetails.html?category=${item.strCategory}">
@@ -72,6 +99,14 @@
                                 </a>
                                 <p>${item.strCategory.toUpperCase()}</p>
                             </div>`
+                }).join("")
+                // SideBar Section
+                sideBarList.innerHTML  = categoriesData.categories.map((item, index) => {
+                    return `<li>
+                                <a href="categoryDetails.html?category=${encodeURIComponent(item.strCategory)}">
+                                    ${item.strCategory}
+                                </a>
+                            </li>`
                 }).join("")
             })
             .catch((error) => {
