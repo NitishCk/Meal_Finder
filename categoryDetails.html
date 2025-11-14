@@ -54,6 +54,16 @@
         <p id="categoryDesc"></p>
     </div>
 
+    <!-- List of Items (From Selected Category) -->
+    <div class="items-container">
+        <div class="categories-heading">
+            <h1>MEALS</h1>
+        </div>
+        <div id="mealsContainer">
+
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="copyright">
         <div>Copyright © 2025 Meal Finder All rights reserved. Design : <strong>Nitish ChittoorKrishnamurthy</strong></div>
@@ -64,8 +74,12 @@
         // Obtained the Category from the Main Page
         const params = new URLSearchParams(window.location.search);
         const categoryName = params.get("category");
+
         const categoryTitle = document.getElementById("categoryTitle");
         const categoryDesc = document.getElementById("categoryDesc")
+
+        const mealsContainer = document.getElementById("mealsContainer");
+
         const hamburger = document.getElementById("hamburger")
         const sideMenu = document.getElementById("sidemenu")
         const closeBtn = document.getElementById("close")
@@ -102,6 +116,54 @@
                 hideLoader();
                 console.log(error)
             })
+
+        
+        if(categoryName){
+
+            // To Show Category Description from the Selected Category
+            categoryTitle.textContent = categoryName.toUpperCase()
+            fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+                .then((res) => res.json())
+                .then((descData) => {
+                    const category = descData.categories.find((item, index) => {
+                        return item.strCategory.toLowerCase() === categoryName.toLowerCase()
+                    }
+                );
+                if (category) {
+                    categoryDesc.textContent = category.strCategoryDescription;
+                }
+                });
+            
+            // To Show Items from the Selected Category
+            fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+                .then((response) => {
+                    if(!response.ok){
+                        throw new Error(`Error Status : ${response.status}`)
+                    }
+                    else{
+                        return response.json()
+                    }
+                })
+                .then((mealsData) => {
+                    if(mealsData.meals){
+                        mealsContainer.innerHTML = mealsData.meals.map((item, index) => {
+                            return `<div class="meal-card">
+                                <a href="mealDetails.html?meal=${encodeURIComponent(item.strMeal)}">
+                                    <img src="${item.strMealThumb}" alt="${item.strMeal}" />
+                                </a>
+                                <p>${item.strMeal}</p>
+                            </div>`;
+                        }).join("")
+                    }
+                    else{
+                        mealsContainer.innerHTML = `<h3>No meals found for ${categoryName}</h3>`;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                    mealsContainer.innerHTML = `<h3>Failed to load meals.</h3>`;
+                })
+        }
     </script>
 </body>
 </html>
