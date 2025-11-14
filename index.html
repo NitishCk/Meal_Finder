@@ -33,5 +33,46 @@
             <p>PERSONALIZE YOUR EXPERIENCE</p>
         </div>
     </div>
+
+    <!-- Categories Section -->
+    <div class="categories-container">
+        <div class="categories-heading">
+            <h1>CATEGORIES</h1>
+        </div>
+        <div id="categories">
+
+        </div>
+    </div>
+
+    <!-- JS Code to Fetch the Data From API  -->
+    <script>
+
+        const categoriesDiv = document.getElementById("categories")
+
+        // API Data
+        fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+            .then((response) => {
+                if(!response.ok){
+                    throw new Error(`Error Status : ${response.status}`)
+                }
+                else{
+                    return response.json()
+                }
+            })
+            .then((categoriesData) => {
+                categoriesDiv.innerHTML = categoriesData.categories.map((item, index, categoriesData) => {
+                    return `<div class = "category-card">
+                                <a href = "categoryDetails.html?category=${item.strCategory}">
+                                    <img src="${item.strCategoryThumb}" alt="${item.strCategory}" />
+                                </a>
+                                <p>${item.strCategory.toUpperCase()}</p>
+                            </div>`
+                }).join("")
+            })
+            .catch((error) => {
+                console.log(error)
+                categoriesDiv.innerHTML = `<h3>Failed to load meals.</h3>`;
+            })
+    </script>
 </body>
 </html>
