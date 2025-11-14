@@ -205,6 +205,138 @@
     color: white;
 }
 
+/* Searched Items Section */
+.searchitems-heading{
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+
+.searchitems-heading h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 10px;
+    display: inline-block;
+    position: relative;
+    filter: brightness(200%);
+}
+
+.searchitems-heading h1::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 60%;           
+    height: 5px;
+    background-color: orangered;
+}
+
+
+
+.searchitems-container {
+    background-color: #fff;
+    transition: padding 0.3s ease;
+    padding: 0px;
+}
+
+.searchitems-container.active {
+    padding: 0px 10px 100px;
+}
+
+.searchitems-heading {
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+
+.searchitems-heading h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.searchitems-heading h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 50%;
+    height: 5px;
+    background-color: orangered; 
+}
+
+
+.search-items {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(250px, 1fr));
+    justify-items: center;
+    gap: 50px;
+    padding: 0px 80px;
+    box-sizing: border-box;
+}
+
+
+.meal-card {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.meal-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.meal-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 4px solid #e06120;
+}
+
+.meal-card p {
+    margin: 8px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+    padding-left: 20px;
+}
+
+.meal-card p:first-of-type {
+    color: rgb(137, 144, 153);
+    font-weight: 700;
+}
+
+.meal-card p:last-of-type {
+    position: absolute;  
+    top: 10px;             
+    right: 10px;          
+    margin: 0px;
+    background-color: white;
+    color: #e06120;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.no-result{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    padding: 50px;
+}
+
+
 /* Categories Section */
 .categories-container {
     background-color: #f5f5f5;

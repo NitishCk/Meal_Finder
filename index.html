@@ -47,6 +47,11 @@
         </div>
     </div>
 
+    <!-- Searched Items Section -->
+    <div class="searchitems-container">
+
+    </div>
+
     <!-- Categories Section -->
     <div class="categories-container">
         <div class="categories-heading">
@@ -70,6 +75,9 @@
         const sideMenu = document.getElementById("sidemenu")
         const closeBtn = document.getElementById("close")
         const sideBarList = document.getElementById("itemLinks")
+        const searchDiv = document.querySelector(".searchitems-container")
+        const searchInput = document.getElementById("input") 
+        const searchIcon = document.querySelector(".fa-magnifying-glass")
 
         // Hamburger Menu (Open and Close Functionality)
         hamburger.addEventListener("click", () => {
@@ -111,8 +119,65 @@
             })
             .catch((error) => {
                 console.log(error)
-                categoriesDiv.innerHTML = `<h3>Failed to load meals.</h3>`;
+                categoriesDiv.innerHTML = `<h3>Failed to load Categories.</h3>`;
             })
+        
+        // Searched Items Section
+        function searchMeals(foodName){
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodName}`)
+                .then((response) => {
+                    if(!response.ok){
+                        throw new Error(`Error Status : ${response.status}`)
+                    }
+                    else{
+                        return response.json()
+                    }
+                })
+                .then((searchData) => {
+                    if(searchData.meals){
+                        const mealsHTML = searchData.meals.map((item, index, searchData) => {
+                            return `<div class="meal-card">
+                                        <img src = "${item.strMealThumb}" alt = "${item.strMeal}" />
+                                        <p>${item.strArea}</p>
+                                        <p>${item.strMeal}</p>
+                                        <p>${item.strCategory}</p>
+                                    </div>`
+                        }).join("")
+
+                        searchDiv.classList.add("active");
+
+                        searchDiv.innerHTML = 
+                                    `<div class="searchitems-heading">
+                                        <h1>MEALS</h1>
+                                    </div>
+                                    <div class="search-items">
+                                        ${mealsHTML}    
+                                    </div>`
+                    }
+                    else{
+                        searchDiv.classList.remove("active")
+                        searchDiv.innerHTML = `<h3 class="no-result">No Meals Found For "${foodName}" </h3>`
+                    }
+                })
+        }
+
+        // Search Functionality on Click
+        searchIcon.addEventListener("click", () => {
+            const foodName = searchInput.value.trim()
+            if(foodName){
+                searchMeals(foodName)
+            }
+        })
+
+        // Search Functionality on Enter
+        searchInput.addEventListener("keypress", (event) => {
+            if(event.key === "Enter"){
+                const foodName = searchInput.value.trim()
+                if(foodName){
+                    searchMeals(foodName)
+                }
+            }
+        })
     </script>
 </body>
 </html>
