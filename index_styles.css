@@ -450,3 +450,77 @@
 .hidden {
   display: none !important;
 }
+
+
+/* Responsive Web Design */
+
+/* Tablets (1024px and Below) */
+@media (max-width: 1024px) {
+
+    .hero-image {
+        width: 100%;
+        height: 50vh;
+        overflow: hidden;        
+        position: relative;
+    }
+
+    .search-section {
+        width: 70%;           
+        top: 43%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .input-section {
+        width: 80%;          
+        height: 50px;
+        padding: 15px;
+        font-size: 15px;
+        border-radius: 30px;
+        box-sizing: border-box;
+    }
+
+    .search-section .fa-magnifying-glass {
+        right: 30px;            
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    .text-heading-section {
+        width: 80%;              
+        font-size: 26px;
+        top: 58%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .text-para-section {
+        width: 80%;             
+        font-size: 18px;
+        top: 70%;                
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 5px 0;
+        text-align: center;
+    }
+
+    #categories,
+    .search-items {
+        padding: 0 20px !important;   
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+        gap: 30px;
+        box-sizing: border-box;
+    }
+
+    .sidemenu {
+    width: 260px;
+    right: -260px;
+    overflow-x: hidden;      
+    }
+
+    .loader {
+        top: 90%;
+    }
+}
