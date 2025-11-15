@@ -56,12 +56,21 @@
     <!-- Meal Details Section -->
     <div class="items-container">
 
-        <div class="categories-heading">
+        <div class="meal-heading">
             <h1>MEAL DETAILS</h1>
         </div>
         <div id="mealsContainer" class="meal-details-container">
 
         </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="categories-container">
+        <div class="categories-heading">
+            <h1>CATEGORIES</h1>
+        </div>
+
+        <div id="categories"></div>
     </div>
 
     <!-- Footer Section -->
@@ -78,6 +87,9 @@
 
         const mealNameElement = document.getElementById("mealName");
         const mealsContainer = document.getElementById("mealsContainer");
+
+        const categoriesDiv = document.getElementById("categories");
+        const sideBarList = document.getElementById("itemLinks");
 
         const hamburger = document.getElementById("hamburger")
         const sideMenu = document.getElementById("sidemenu")
@@ -211,6 +223,49 @@
                     mealsContainer.innerHTML = `<h3>Error loading meal details.</h3>`;
                 });
             }
+
+            // API Data to Fetch Categories (on Meal Details Page and Sidebar)
+            function fetchCategories() {
+                fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+                    .then((response) => {
+                        if(!response.ok){
+                            throw new Error(`Error Status : ${response.status}`)
+                        }
+                        else{
+                            return response.json()
+                        }
+                    })
+                    .then(categoriesData => {
+                   
+                        // Categories Section
+                        if (categoriesDiv) {
+                        categoriesDiv.innerHTML = categoriesData.categories.map(item => {
+                            return `<div class="category-card">
+                                    <a href="categoryDetails.html?category=${encodeURIComponent(item.strCategory)}">
+                                        <img src="${item.strCategoryThumb}" alt="${item.strCategory}" />
+                                    </a>
+                                    <p>${item.strCategory.toUpperCase()}</p>
+                                    </div>`;
+                        }).join("");
+                        }
+
+                        // Sidebar Section
+                        if (sideBarList) {
+                        sideBarList.innerHTML = categoriesData.categories.map(item => {
+                            return `<li>
+                                    <a href="categoryDetails.html?category=${encodeURIComponent(item.strCategory)}">
+                                        ${item.strCategory}
+                                    </a>
+                                    </li>`;
+                        }).join("");
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Categories fetch error:", err);
+                    });
+                }
+
+            fetchCategories(); 
     </script>
 </body>
 </html>
