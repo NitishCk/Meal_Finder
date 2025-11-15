@@ -427,3 +427,172 @@
     top: 60%; 
   }
 }
+
+/* Mobile Phones (600px and Below) */
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 10px 15px;
+        font-size: 22px;
+    }
+
+    .nav-left a {
+        font-size: 18px;
+    }
+
+    .hamburger {
+        font-size: 24px;
+    }
+
+    .hero-image {
+        height: 45vh;
+    }
+
+    .search-section {
+        width: 90%;
+        top: 48%;
+    }
+
+    .input-section {
+        width: 80%;
+        height: 45px;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .search-section .fa-magnifying-glass {
+        padding: 12px;
+        font-size: 16px;
+        right: 4px;
+    }
+
+    .text-heading-section {
+        width: 90%;
+        font-size: 20px;
+        top: 60%;
+        text-align: center;
+    }
+
+    .text-para-section {
+        width: 90%;
+        font-size: 16px;
+        top: 88%;
+        text-align: center;
+    }
+
+    #categories,
+    .search-items,
+    #mealsContainer {
+        grid-template-columns: 1fr !important;
+        gap: 25px;
+        padding: 0 20px;
+    }
+    .meal-card img,
+    .category-card img {
+        height: 160px;
+    }
+
+    .sidemenu {
+        width: 65%;        
+        right: -65%;       
+        padding: 15px;   
+    }
+
+    .sidemenu.open {
+        right: 0;
+    }
+
+    #itemLinks li {
+        padding: 8px 0;      
+    }
+
+    #itemLinks a {
+        font-size: 13px;     
+    }
+
+    .sidemenu-header .fa-xmark {
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+        border-width: 2px;
+    }
+
+    .sidemenu-header {
+        padding-bottom: 6px;
+    }
+ 
+    .loader {
+        width: 45px;
+        height: 45px;
+        top: 50%;
+    }
+
+    .copyright{
+        font-size: 13px;
+    }
+
+    .categories-heading h1,
+    .searchitems-heading h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 36px;
+        letter-spacing: 10px;
+        display: inline-block;
+        position: relative;
+        filter: brightness(200%);
+        left: -50px;
+    }
+
+    .categories-heading h1::after,
+    .searchitems-heading h1::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -15px;
+        width: 40%;
+        height: 5px;
+        background-color: orangered;
+    }
+
+    .searchitems-heading {
+        padding-top: 100px;
+        padding-bottom: 50px;
+        padding-left: 80px;
+    }
+
+}
+
+/* Small Mobile Phones (380px and Below) */
+@media (max-width: 380px) {
+  .text-heading-section { 
+    font-size: 18px; 
+    top: 65%; 
+    padding: 6px; 
+  }
+
+  .text-para-section { 
+    font-size: 13px; 
+    top: 90%; 
+    padding: 4px; 
+  }
+
+  .input-section { 
+    font-size: 13px; 
+    padding: 10px; 
+  }
+
+  .navbar { 
+    font-size: 20px; 
+    padding: 10px 10px; 
+  }
+
+  .search-items, #mealsContainer, #categories { 
+    padding: 0 12px; 
+    gap: 16px; 
+  }
+
+  .sidemenu { 
+    width: 65%; 
+    right: -65%; 
+  }
+}
