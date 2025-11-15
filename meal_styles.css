@@ -802,3 +802,222 @@ span{
       padding-bottom: 100px;
   }
 }
+
+/* Mobile Phones (600px and Below) */
+@media (max-width: 600px) {
+
+  html, body { 
+    overflow-x: hidden; 
+  }
+
+  .navbar { 
+    padding: 10px 12px; 
+    font-size: 22px; 
+  }
+
+  .hamburger { 
+    font-size: 24px; 
+  }
+
+  .hero-image { 
+    height: 45vh; 
+  }
+
+  .search-section { 
+    width: 90%; 
+    top: 48%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+  }
+
+  .input-section { 
+        width: 80%;
+        height: 45px;
+        padding: 12px;
+        font-size: 14px;
+  }
+
+    .search-section .fa-magnifying-glass {
+        padding: 12px;
+        font-size: 16px;
+        right: 4px;
+    }
+
+  .text-heading-section {
+    width: 94%; 
+    font-size: 20px; 
+    top: 58%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center; 
+    padding: 8px;
+  }
+
+  .text-para-section {
+    width: 94%; 
+    font-size: 14px; 
+    top: 70%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center; 
+    padding: 6px;
+  }
+
+  .meal-box-container { 
+    padding: 20px 18px; 
+    max-width: 100%; 
+    margin: 20px auto; 
+  }
+
+  .meal-detail { 
+    flex-direction: column; 
+    gap: 18px; 
+    padding: 0; 
+  }
+
+  .meal-left img { 
+    max-height: 320px; 
+    border-radius: 10px; 
+  }
+
+  .meal-right h2 { 
+    font-size: 26px; 
+  }
+
+  .meal-right p { 
+    font-size: 14px; 
+  }
+
+  .ingredients-box { 
+    padding: 16px; 
+  }
+
+  .ingredients-box ul { 
+    grid-template-columns: repeat(2, minmax(120px, 1fr)); 
+    gap: 12px; 
+  }
+
+  .ingredients-box .num { 
+    width: 32px; 
+    height: 32px; 
+    font-size: 11px; 
+  }
+
+  .measurements-box { 
+    padding: 14px; 
+  }
+
+  .measurement-list { 
+    grid-template-columns: 1fr; 
+    gap: 12px; 
+  }
+
+  .measurement-item p { 
+    font-size: 16px; 
+  }
+
+  .instructions { 
+    padding: 14px 16px; 
+  }
+
+  .instruction-item { 
+    gap: 8px; 
+    padding: 8px; 
+  }
+
+  .tick-box { 
+    width: 30px; 
+    height: 30px; 
+    font-size: 12px; 
+  }
+
+  .search-items, 
+  #mealsContainer, 
+  #categories {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+    gap: 20px;
+  }
+
+  .sidemenu { 
+    width: 72%; 
+    right: -72%; 
+    padding: 12px; 
+  }
+
+  .sidemenu.open { 
+    right: 0; 
+  }
+
+  #itemLinks a { 
+    font-size: 16px; 
+    padding-left: 4px; 
+  }
+
+  .homeBar { 
+    padding: 12px; 
+    margin: 4% 3%; 
+  }
+
+  .homeBar #mealName { 
+    font-size: 22px; 
+  }
+
+  .copyright { 
+    font-size: 13px; 
+    padding: 18px; 
+  }
+
+  .loader { 
+    width: 44px; 
+    height: 44px; 
+    top: 58%; 
+  }
+
+  #categories { 
+    padding-bottom: 100px; 
+  }
+
+}
+
+/* Small Mobile Phones (380px and Below) */
+@media (max-width: 380px) {
+  .text-heading-section { 
+    font-size: 18px; 
+    top: 65%; 
+    padding: 6px; 
+  }
+
+  .text-para-section { 
+    font-size: 13px; 
+    top: 90%; 
+    padding: 4px; 
+  }
+  
+  .input-section { 
+    font-size: 13px; 
+    padding: 10px; 
+  }
+
+  .meal-right h2 { 
+    font-size: 22px; 
+  }
+
+  .ingredients-box ul { 
+    grid-template-columns: 1fr; 
+  }
+
+  .sidemenu { 
+    width: 65%; 
+    right: -65%; 
+  }
+
+  .search-items, #mealsContainer, #categories { 
+    padding: 0 12px; 
+    gap: 14px; 
+  }
+  
+  #categories {
+      padding-bottom: 100px;
+  }
+}
