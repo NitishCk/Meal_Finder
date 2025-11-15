@@ -14,7 +14,7 @@
     <div class="navbar">
         <div class="nav-left">
             <i class="fa-solid fa-utensils"></i>
-            <a href="">MEAL FINDER</a>
+            <a href="/">MEAL FINDER</a>
         </div>
 
         <div class="hamburger" id="hamburger">
@@ -46,6 +46,24 @@
         </div>
     </div>
 
+    <!-- Home Bar Section -->
+    <div class="homeBar">
+        <a href="index.html"><i class="fa-solid fa-house"></i></a>
+        <span> » </span>
+        <span id="mealName"></span>
+    </div>
+
+    <!-- Meal Details Section -->
+    <div class="items-container">
+
+        <div class="categories-heading">
+            <h1>MEAL DETAILS</h1>
+        </div>
+        <div id="mealsContainer" class="meal-details-container">
+
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="copyright">
         <div>Copyright © 2025 Meal Finder All rights reserved. Design : <strong>Nitish ChittoorKrishnamurthy</strong></div>
@@ -53,6 +71,13 @@
 
     <!-- JS Code to Fetch the Data From API  -->
     <script>
+
+        // Obtained the Category from the Main Page
+        const params = new URLSearchParams(window.location.search);
+        const mealName = params.get("meal");
+
+        const mealNameElement = document.getElementById("mealName");
+        const mealsContainer = document.getElementById("mealsContainer");
 
         const hamburger = document.getElementById("hamburger")
         const sideMenu = document.getElementById("sidemenu")
@@ -66,6 +91,126 @@
         closeBtn.addEventListener("click", () => {
             sideMenu.classList.remove("open")
         })
+
+        // show current meal name
+        mealNameElement.textContent = mealName || "Meal Details";
+
+        // API Data (To Fetch Details of a Selected Meal )
+        if (mealName) {
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(mealName)}`)
+                .then((response) => {
+                    if(!response.ok){
+                        throw new Error(`Error Status : ${response.status}`)
+                    }
+                    else{
+                        return response.json()
+                    }
+                })
+                .then((data) => {
+                    const meal = data.meals ? data.meals[0] : null;
+                    if (!meal) {
+                    mealsContainer.innerHTML = `<h3>No details found for ${mealName}</h3>`;
+                    return;
+                    }
+
+                    // Collect Ingredients and Measurements
+                    const ingredients = [];
+                    const measurements = [];
+
+                    for (let i = 1; i <= 20; i++) {
+                    const ingredient = meal[`strIngredient${i}`] ? meal[`strIngredient${i}`].trim() : "";
+                    const measure = meal[`strMeasure${i}`] ? meal[`strMeasure${i}`].trim() : "";
+
+                    if (ingredient) {
+                      ingredients.push(ingredient);
+                      if (measure) measurements.push(measure);
+                      }
+                    }
+
+                    // Prepare instructions array (split & clean lines)
+                    const instructionsArray = (meal.strInstructions || "")
+                    .split(/\r?\n/)
+                    .map(step =>
+                        step
+                        .replace(/^\d+\s*[\.\)\-]?\s*/i, "")
+                        .replace(/^step\s*\d+[\.\:\-\)]?\s*/i, "")
+                        .trim()
+                    )
+                    .filter(step => step !== "");
+
+                    // Render the Full Content 
+                    mealsContainer.innerHTML = `
+                        <div class="meal-box-container">
+                            <div class="meal-detail">
+
+                                <div class="meal-left">
+                                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                                </div>
+
+                                <div class="meal-right">
+                                    <h2>${meal.strMeal}</h2>
+                                    <hr>
+                                    <p><strong>Category:</strong> ${meal.strCategory ? meal.strCategory.toUpperCase() : "-"}</p>
+                                    ${
+                                        meal.strSource
+                                        ? `<p><strong>Source:</strong> <a href="${meal.strSource}" target="_blank">${meal.strSource}</a></p>`
+                                        : ""
+                                    }
+                                    <p><strong>Tags:</strong>
+                                        ${
+                                        meal.strTags
+                                            ? meal.strTags.split(",").map(tag => `<span class="tag">${tag}</span>`).join(" ")
+                                            : "<span class='tag none'>No tags</span>"
+                                        }
+                                    </p>
+                                    <div class="ingredients-box">
+                                        <h3>Ingredients :</h3>
+                                        <ul>
+                                        ${ingredients.map((ing, i) => `<li><span class="num">${i + 1}</span> ${ing}</li>`).join("")}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="measure-section inside">
+                                <h3 class="measure-title">Measurements :</h3>
+                                <div class="measurements-box">
+                                    <div class="measurement-list">
+                                        ${measurements
+                                            .map(
+                                                meas => `
+                                                <div class="measurement-item">
+                                                    <span class="measure-icon"><i class="fa-solid fa-utensil-spoon"></i></span>
+                                                    <p>${meas}</p>
+                                                </div>`
+                                            ).join("")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="instructions inside">
+                                <h3>Instructions :</h3>
+                                <div class="instruction-list">
+                                    ${instructionsArray
+                                        .map(
+                                            step => `
+                                            <div class="instruction-item">
+                                                <span class="tick-box"><i class="fa-solid fa-check"></i></span>
+                                                <p>${step}</p>
+                                            </div>`
+                                        ).join("")
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(err => {
+                    console.error("Meal fetch error:", err);
+                    mealsContainer.innerHTML = `<h3>Error loading meal details.</h3>`;
+                });
+            }
     </script>
 </body>
 </html>
