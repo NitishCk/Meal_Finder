@@ -343,7 +343,6 @@
 /* Responsive Web Design */
 
 /* Tablets (1024px and Below) */
-
 @media (max-width: 1024px) {
   html, body { 
     overflow-x: hidden; 
@@ -383,13 +382,23 @@
   }
 
   .text-heading-section {
-    width: 82%; font-size: 24px; top: 56%;
-    left: 50%; transform: translate(-50%,-50%); text-align: center; padding: 12px;
+    width: 82%; 
+    font-size: 24px; 
+    top: 56%;
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+    text-align: center; 
+    padding: 12px;
   }
 
   .text-para-section {
-    width: 82%; font-size: 16px; top: 68%;
-    left: 50%; transform: translate(-50%,-50%); text-align: center; padding: 8px;
+    width: 82%; 
+    font-size: 16px; 
+    top: 68%;
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+    text-align: center; 
+    padding: 8px;
   }
 
   .search-items, #mealsContainer, #categories {
