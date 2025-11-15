@@ -1,6 +1,7 @@
 html, body {
-  overflow-x: hidden; /* prevents horizontal scrolling */
+  overflow-x: hidden; 
 }
+
 
 * {
     margin: 0;

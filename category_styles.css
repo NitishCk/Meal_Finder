@@ -339,3 +339,91 @@
 .hidden {
   display: none !important;
 }
+
+/* Responsive Web Design */
+
+/* Tablets (1024px and Below) */
+
+@media (max-width: 1024px) {
+  html, body { 
+    overflow-x: hidden; 
+  } 
+
+  .navbar { 
+    padding: 11px 16px; 
+    font-size: 24px; 
+  }
+
+  .nav-left a { 
+    font-size: 18px; 
+  }
+
+  .hero-image { 
+    height: 48vh; 
+  }
+
+  .search-section { 
+    width: 70%; 
+    top: 43%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+  }
+
+  .input-section { 
+    width: 80%; 
+    height: 50px; 
+    padding: 14px; 
+    font-size: 15px; 
+  }
+
+  .search-section .fa-magnifying-glass { 
+    right: 30px; 
+    padding: 15px; 
+    font-size: 18px; 
+  }
+
+  .text-heading-section {
+    width: 82%; font-size: 24px; top: 56%;
+    left: 50%; transform: translate(-50%,-50%); text-align: center; padding: 12px;
+  }
+
+  .text-para-section {
+    width: 82%; font-size: 16px; top: 68%;
+    left: 50%; transform: translate(-50%,-50%); text-align: center; padding: 8px;
+  }
+
+  .search-items, #mealsContainer, #categories {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    padding: 0 24px;
+    gap: 30px;
+  }
+
+  .meal-card, .category-card { 
+    max-width: 280px; 
+  }
+
+  .meal-card img, .category-card img { 
+    height: 180px; 
+  }
+
+  .categoryDetails { 
+    margin: 4% 4%; 
+    padding: 18px; 
+  }
+
+  .sidemenu { 
+    width: 240px; 
+    right: -240px; 
+    padding: 16px; 
+  }
+
+  #itemLinks a { 
+    font-size: 17px; 
+  }
+
+  .loader { 
+    width: 52px; 
+    height: 52px; 
+    top: 60%; 
+  }
+}
