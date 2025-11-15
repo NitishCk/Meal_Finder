@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar Section */
+.navbar {
+    background-color: #e06120;
+    padding: 15px 25px;
+    font-size: 30px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-left i {
+  color: white;
+  margin-right: 10px;
+}
+
+.navbar .fa-utensils {
+    color: white;
+}
+
+.navbar a{
+    font-family: 'Gotham Rounded', 'Avenir Next Rounded', 'Nunito', sans-serif;
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration: none;
+    padding-left: 10px;
+}
